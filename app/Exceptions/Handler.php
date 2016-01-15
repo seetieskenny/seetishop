@@ -10,6 +10,8 @@ use Illuminate\Foundation\Validation\ValidationException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
+use App\Services\ApiException;
+
 class Handler extends ExceptionHandler
 {
     /**
@@ -46,6 +48,11 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $e)
     {
+        // custom exception handler
+        /*if ($e instanceof ApiException) {
+            var_dump($e);
+            return;
+        }*/
         return parent::render($request, $e);
     }
 }

@@ -1,0 +1,31 @@
+@import '../../variables';
+@import '../../mixins';
+
+.header{
+	@height: 80px;
+
+	position: relative;
+	height: @height;
+
+	&-inner{
+		height: @height;
+		background-color: #fff;
+		border-bottom: 1px solid @border;
+		line-height: @height;
+	}
+
+	&-nav{
+		position: absolute;
+		left: 0;
+		right: 0;
+		top: 0;
+		height: 1px;
+		text-align: center;
+		> nav{
+			display: inline-block;
+		}
+		ul.list-inline{
+			margin-bottom: 0;
+		}
+	}
+}

@@ -1,31 +1,68 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Routes File
-|--------------------------------------------------------------------------
-|
-| Here is where you will register all of the routes in an application.
-| It's a breeze. Simply tell Laravel the URIs it should respond to
-| and give it the controller to call when that URI is requested.
-|
-*/
 
-Route::get('/', function () {
-    return view('welcome');
+// Home
+Route::get('/', [
+	'as' 	=> 'home',
+	'uses' 	=> 'HomeController@index'
+]);
+
+
+
+
+
+// Required login pages
+Route::group(['middleware' => ['auth']], function () 
+{
+    
+    // Dashboard
+	Route::get('dashboard', function() 
+	{
+		return 'zzz';
+	});
+
 });
 
-/*
-|--------------------------------------------------------------------------
-| Application Routes
-|--------------------------------------------------------------------------
-|
-| This route group applies the "web" middleware group to every route
-| it contains. The "web" middleware group is defined in your HTTP
-| kernel and includes session state, CSRF protection, and more.
-|
-*/
 
-Route::group(['middleware' => ['web']], function () {
-    //
-});
+
+// JS Test
+Route::get('js-test', [
+	'uses' 	=> 'TestController@js'
+]);
+
+
+
+// Auth Test
+Route::post('login', [
+	'as' 	=> 'post_login',
+	'before' => 'csrf',
+	'uses'	=> 'TestController@login'
+]);
+
+Route::get('logout', [
+	'as' 	=> 'logout',
+	'uses' 	=> 'TestController@logout'
+]);
+
+
+// Test
+Route::get('setcookie', [
+	'uses' 	=> 'TestController@createCookie'
+]);
+
+
+Route::get('getcookie', [
+	'uses'	=> 'TestController@getCookie'
+]);
+
+
+Route::get('clearsession', [
+	'as' 	=> 'test',
+	'uses' 	=> 'TestController@clearSession'
+]);
+
+
+// All route let react-router handle
+Route::get('/{page}', [
+	'uses' 	=> 'HomeController@index'
+])->where(['page' => '.*']);

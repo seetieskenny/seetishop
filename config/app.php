@@ -91,9 +91,9 @@ return [
     |
     */
 
-    'key' => env('APP_KEY'),
+    'key' => env('APP_KEY', 'SomeRandomKey'),
 
-    'cipher' => 'AES-256-CBC',
+    'cipher' => MCRYPT_RIJNDAEL_128,
 
     /*
     |--------------------------------------------------------------------------
@@ -156,6 +156,9 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        // Installed providers
+        Collective\Html\HtmlServiceProvider::class,
+
     ],
 
     /*
@@ -201,6 +204,14 @@ return [
         'URL'       => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View'      => Illuminate\Support\Facades\View::class,
+
+        // Plugin alias
+        'Form'      => Collective\Html\FormFacade::class,
+        'Html'      => Collective\Html\HtmlFacade::class,
+
+        // Custom alias
+        'Utils'      => App\Helpers\Utils::class,
+        'Normalizer' => App\Helpers\Normalizer::class,
 
     ],
 

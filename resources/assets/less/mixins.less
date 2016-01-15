@@ -1,0 +1,51 @@
+/**
+ * Define your LESS mixins here ...
+ */
+
+.clearfix() {
+  &:before,
+  &:after {
+    content: " "; // 1
+    display: table; // 2
+  }
+
+  &:after {
+    clear: both;
+  }
+}
+
+.placeholder(@rules) {
+  &::-webkit-input-placeholder {
+    @rules();
+  }
+  &:-moz-placeholder {
+    @rules();
+  }
+  &::-moz-placeholder {
+    @rules();
+  }
+  &:-ms-input-placeholder {
+    @rules();
+  }
+}
+
+.truncate() {
+  text-overflow: ellipsis;
+  display: inline-block;
+  vertical-align: top;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.clip-path(@clip) {
+  clip-path: @clip;
+  -webkit-clip-path: @clip;
+}
+
+.position(@top:0, @right:0, @bottom:@top, @left:@right) {
+    position: absolute;
+    top: @top;
+    bottom: @bottom;
+    right: @right;
+    left: @left;
+}
